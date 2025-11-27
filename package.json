@@ -9,6 +9,9 @@
   "dependencies": {
     "discord.js": "^14.14.1"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "keywords": ["discord", "bot", "ping"],
   "author": "Your Name",
   "license": "MIT"
