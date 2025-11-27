@@ -18,8 +18,8 @@ const SERVER_DETAILS = {
 };
 
 client.on('ready', () => {
-    console.log(`✅ ${client.user.tag} Railway এ রান করছে!`);
-    console.log(`✅ IP রেসপন্স সিস্টেম চালু!`);
+    console.log(`✅ ${client.user.tag} is running on Railway!`);
+    console.log(`✅ IP Response system activated!`);
 });
 
 client.on('messageCreate', async (message) => {
@@ -28,38 +28,31 @@ client.on('messageCreate', async (message) => {
     const content = message.content.toLowerCase().trim();
     
     if (content === 'ip' || content === '/ip') {
-        // কপি বাটন তৈরি
+        // Copy buttons
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setLabel('Java IP কপি করুন')
+                    .setLabel('Copy Java IP')
                     .setStyle(ButtonStyle.Primary)
                     .setCustomId('copy_java_ip'),
                 new ButtonBuilder()
-                    .setLabel('পোর্ট কপি করুন')
+                    .setLabel('Copy Port')
                     .setStyle(ButtonStyle.Secondary)
                     .setCustomId('copy_port'),
                 new ButtonBuilder()
-                    .setLabel('ওয়েবসাইট ভিজিট করুন')
+                    .setLabel('Visit Website')
                     .setStyle(ButtonStyle.Link)
                     .setURL(SERVER_DETAILS.website)
             );
 
         const replyMessage = `
-🎮 **DrkSurvRaze Server Connection Details**
+**DrKSurvRaze Server Connection Details**
 
-▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+**Java IP**  
+**Bedrock IP**  
+**Port: ${SERVER_DETAILS.port}**
 
-**☕ JAVA EDITION:**
-🔗 **IP:** \`${SERVER_DETAILS.javaIp}\`
-
-**🪨 BEDROCK EDITION:**
-🔗 **Ip:** \`${SERVER_DETAILS.bedrockIp}\`
-⚡ **PORT:** \`${SERVER_DETAILS.port}\`
-
-🌐 **WEBSITE:** ${SERVER_DETAILS.website}
-
-*Use the button above to copy the IP or port*
+Use the button above to copy the IP or port
         `.trim();
         
         const sentMessage = await message.channel.send({
@@ -67,24 +60,24 @@ client.on('messageCreate', async (message) => {
             components: [row]
         });
         
-        console.log(`📨 ${message.author.tag} কে সার্ভার ডিটেইলস পাঠানো হয়েছে`);
+        console.log(`📨 Server details sent to ${message.author.tag}`);
     }
 });
 
-// বাটন ইন্টার্যাকশন হ্যান্ডেলার
+// Button interaction handler
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isButton()) return;
 
     if (interaction.customId === 'copy_java_ip') {
         await interaction.reply({ 
-            content: `📋 Java IP has been copied: \`${SERVER_DETAILS.javaIp}\``,
+            content: `Java IP has been copied: \`${SERVER_DETAILS.javaIp}\``,
             ephemeral: true
         });
     }
 
     if (interaction.customId === 'copy_port') {
         await interaction.reply({ 
-            content: `📋 Port has been copied: \`${SERVER_DETAILS.port}\``,
+            content: `Port has been copied: \`${SERVER_DETAILS.port}\``,
             ephemeral: true
         });
     }
