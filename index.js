@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
 const client = new Client({
     intents: [
@@ -18,68 +18,41 @@ const SERVER_DETAILS = {
 };
 
 client.on('ready', () => {
-    console.log(`✅ ${client.user.tag} is running on Railway!`);
-    console.log(`✅ IP Response system activated!`);
+    console.log(`✅ ${client.user.tag} Railway এ রান করছে!`);
+    console.log(`✅ IP রেসপন্স সিস্টেম চালু!`);
 });
 
 client.on('messageCreate', async (message) => {
     if (message.author.bot) return;
 
-    const content = message.content.toLowerCase().trim();
+    const content = message.content.toLowerCase();
     
-    if (content === 'ip' || content === '/ip') {
-        // Copy buttons
-        const row = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setLabel('Copy Java IP')
-                    .setStyle(ButtonStyle.Primary)
-                    .setCustomId('copy_java_ip'),
-                new ButtonBuilder()
-                    .setLabel('Copy Port')
-                    .setStyle(ButtonStyle.Secondary)
-                    .setCustomId('copy_port'),
-                new ButtonBuilder()
-                    .setLabel('Visit Website')
-                    .setStyle(ButtonStyle.Link)
-                    .setURL(SERVER_DETAILS.website)
-            );
-
+    // শুধু "ip" শব্দটি খুঁজে বের করা (যেকোনো জায়গায় থাকলে)
+    const hasIpWord = /\bip\b/.test(content);
+    
+    if (hasIpWord) {
         const replyMessage = `
-**DrKSurvRaze Server Connection Details**
+🎮 **DrkSurvRaze Server Connection Details**
 
-**Java IP**  
-**Bedrock IP**  
-**Port: ${SERVER_DETAILS.port}**
+▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
-Use the button above to copy the IP or port
+**☕ JAVA EDITION:**
+🔗 **IP:** \`${SERVER_DETAILS.javaIp}\`
+
+**🪨 BEDROCK EDITION:**
+🔗 **Ip:** \`${SERVER_DETAILS.bedrockIp}\`
+⚡ **PORT:** \`${SERVER_DETAILS.port}\`
+
+🌐 **WEBSITE:** ${SERVER_DETAILS.website}
+
+*আইপি কপি করতে উপরের টেক্সট সিলেক্ট করুন*
         `.trim();
         
-        const sentMessage = await message.channel.send({
-            content: replyMessage,
-            components: [row]
+        await message.channel.send({
+            content: replyMessage
         });
         
-        console.log(`📨 Server details sent to ${message.author.tag}`);
-    }
-});
-
-// Button interaction handler
-client.on('interactionCreate', async (interaction) => {
-    if (!interaction.isButton()) return;
-
-    if (interaction.customId === 'copy_java_ip') {
-        await interaction.reply({ 
-            content: `Java IP has been copied: \`${SERVER_DETAILS.javaIp}\``,
-            ephemeral: true
-        });
-    }
-
-    if (interaction.customId === 'copy_port') {
-        await interaction.reply({ 
-            content: `Port has been copied: \`${SERVER_DETAILS.port}\``,
-            ephemeral: true
-        });
+        console.log(`📨 ${message.author.tag} কে সার্ভার ডিটেইলস পাঠানো হয়েছে - মেসেজ: "${message.content}"`);
     }
 });
 
