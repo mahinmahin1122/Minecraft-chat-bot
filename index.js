@@ -46,21 +46,20 @@ client.on('messageCreate', async (message) => {
             );
 
         const replyMessage = `
-🎮 **ডার্ক সারভাইভাল জ়েরো সার্ভার কানেকশন ডিটেইলস**
+🎮 **DrkSurvRaze Server Connection Details**
 
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
-**☕ জাভা এডিশন:**
-🔗 **আইপি:** \`${SERVER_DETAILS.javaIp}\`
-⚡ **পোর্ট:** \`${SERVER_DETAILS.port}\`
+**☕ JAVA EDITION:**
+🔗 **IP:** \`${SERVER_DETAILS.javaIp}\`
 
-**🪨 বেডরক এডিশন:**
-🔗 **আইপি:** \`${SERVER_DETAILS.bedrockIp}\`
-⚡ **পোর্ট:** \`${SERVER_DETAILS.port}\`
+**🪨 BEDROCK EDITION:**
+🔗 **Ip:** \`${SERVER_DETAILS.bedrockIp}\`
+⚡ **PORT:** \`${SERVER_DETAILS.port}\`
 
-🌐 **ওয়েবসাইট:** ${SERVER_DETAILS.website}
+🌐 **WEBSITE:** ${SERVER_DETAILS.website}
 
-*আইপি বা পোর্ট কপি করতে উপরের বাটন ব্যবহার করুন*
+*Use the button above to copy the IP or port*
         `.trim();
         
         const sentMessage = await message.channel.send({
@@ -78,14 +77,14 @@ client.on('interactionCreate', async (interaction) => {
 
     if (interaction.customId === 'copy_java_ip') {
         await interaction.reply({ 
-            content: `📋 Java IP কপি করা হয়েছে: \`${SERVER_DETAILS.javaIp}\``,
+            content: `📋 Java IP has been copied: \`${SERVER_DETAILS.javaIp}\``,
             ephemeral: true
         });
     }
 
     if (interaction.customId === 'copy_port') {
         await interaction.reply({ 
-            content: `📋 পোর্ট কপি করা হয়েছে: \`${SERVER_DETAILS.port}\``,
+            content: `📋 Port has been copied: \`${SERVER_DETAILS.port}\``,
             ephemeral: true
         });
     }
