@@ -1,7 +1,7 @@
 {
-  "name": "discord-ping-bot",
+  "name": "discord-text-bot",
   "version": "1.0.0",
-  "description": "A simple Discord ping bot",
+  "description": "Discord Bot for ./text command",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -11,8 +11,5 @@
   },
   "engines": {
     "node": "18.x"
-  },
-  "keywords": ["discord", "bot", "ping"],
-  "author": "Your Name",
-  "license": "MIT"
+  }
 }
