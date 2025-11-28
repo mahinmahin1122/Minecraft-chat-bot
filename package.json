@@ -13,3 +13,9 @@
     "node": "18.x"
   }
 }
+{
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "minecraft-server-util": "^3.5.1"
+  }
+}
