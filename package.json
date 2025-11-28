@@ -1,21 +1,16 @@
 {
   "name": "discord-text-bot",
   "version": "1.0.0",
-  "description": "Discord Bot for ./text command",
+  "description": "Discord Bot for ./text command and Minecraft server status",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "discord.js": "^14.14.1",
+    "minecraft-server-util": "^3.5.1"
   },
   "engines": {
     "node": "18.x"
-  }
-}
-{
-  "dependencies": {
-    "discord.js": "^14.14.1",
-    "minecraft-server-util": "^3.5.1"
   }
 }
