@@ -1,7 +1,7 @@
 {
-  "name": "discord-text-bot",
+  "name": "discord-minecraft-bot",
   "version": "1.0.0",
-  "description": "Discord Bot for ./text command and Minecraft server status",
+  "description": "Discord Bot for Minecraft server status and IP responses",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
