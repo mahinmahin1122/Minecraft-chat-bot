@@ -1,16 +1,15 @@
 {
-  "name": "discord-minecraft-bot",
+  "name": "minecraft-chat-bot",
   "version": "1.0.0",
-  "description": "Discord Bot for Minecraft server status and IP responses",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.14.1",
-    
+    "discord.js": "^14.15.3"
   },
   "engines": {
-    "node": "18.x"
+    "node": ">=18"
   }
 }
