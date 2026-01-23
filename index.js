@@ -1,5 +1,4 @@
 const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
-require('dotenv').config();
 
 const client = new Client({
     intents: [
@@ -22,12 +21,22 @@ const SERVER_INFO = {
     website: 'https://drksurvraze.top'
 };
 
+// টোকেন এখানে সরাসরি দিন (Render.com এর Environment Variable থেকে পড়বে)
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN || 'your_bot_token_here';
+
+// যদি টোকেন না থাকে তবে Error দেখাবে
+if (!DISCORD_TOKEN || DISCORD_TOKEN === 'your_bot_token_here') {
+    console.error('❌ ERROR: Discord Token is missing!');
+    console.log('Please set DISCORD_TOKEN in Render.com environment variables');
+    process.exit(1);
+}
+
 // Keywords that trigger the bot response
-const TRIGGER_KEYWORDS = ['ip', 'server', 'server ip', 'mc server', 'minecraft', 'connect', 'how to join'];
+const TRIGGER_KEYWORDS = ['ip', 'server', 'server ip', 'mc server', 'minecraft', 'connect', 'how to join', 'drksurvraze'];
 
 client.on('ready', () => {
     console.log(`✅ Bot is online as ${client.user.tag}`);
-    client.user.setActivity('Minecraft Server Info', { type: 'PLAYING' });
+    client.user.setActivity('DrkSurvRaze Server', { type: 'PLAYING' });
 });
 
 client.on('messageCreate', async (message) => {
@@ -43,7 +52,7 @@ client.on('messageCreate', async (message) => {
     
     if (shouldRespond) {
         const embed = new EmbedBuilder()
-            .setColor(0x00FF00) // Green color
+            .setColor(0x00FF00)
             .setTitle('🎮 DrkSurvRaze Minecraft Server')
             .setDescription('Here are the server details:')
             .addFields(
@@ -64,28 +73,12 @@ client.on('messageCreate', async (message) => {
                 }
             )
             .setTimestamp()
-            .setFooter({ text: 'DrkSurvRaze Server', iconURL: 'https://cdn.discordapp.com/embed/avatars/0.png' });
+            .setFooter({ text: 'DrkSurvRaze Server' });
         
-        // Try to send the embed
         try {
-            await message.channel.send({ embeds: [embed] });
+            await message.reply({ embeds: [embed] });
         } catch (error) {
             console.error('Error sending message:', error);
-            // Fallback to simple message if embed fails
-            const simpleMessage = `
-**DrkSurvRaze Minecraft Server Details:**
-
-🟢 **JAVA EDITION:**
-\`${SERVER_INFO.java.ip}\`
-
-🟣 **BEDROCK EDITION:**
-IP: \`${SERVER_INFO.bedrock.ip}\`
-Port: \`${SERVER_INFO.bedrock.port}\`
-
-🌐 **WEBSITE:**
-${SERVER_INFO.website}
-            `;
-            await message.channel.send(simpleMessage);
         }
     }
 });
@@ -100,4 +93,4 @@ process.on('unhandledRejection', (error) => {
 });
 
 // Login to Discord
-client.login(process.env.DISCORD_TOKEN);
+client.login(DISCORD_TOKEN);
