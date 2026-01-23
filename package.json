@@ -1,12 +1,19 @@
 {
-  "name": "minecraft-server-bot",
+  "name": "drksurvraze-discord-bot",
   "version": "1.0.0",
+  "description": "Discord Bot for DrkSurvRaze Minecraft Server",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"No test specified\" && exit 0"
   },
+  "keywords": ["discord", "bot", "minecraft", "server"],
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.3.1"
+    "discord.js": "^14.14.1"
+  },
+  "engines": {
+    "node": ">=16.9.0"
   }
 }
